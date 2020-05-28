@@ -1,0 +1,27 @@
+# branches to build
+branches:
+  only:
+    - master
+  except:
+    - gh-pages
+
+image: Ubuntu1804  # образ для сборки
+
+stack: node 10  # окружение
+
+# build cache to preserve files/folders between builds
+cache:
+  - node_modules                    # local npm modules
+
+# scripts that run after cloning repository
+install:
+  - npm install  # команда установки зависимостей
+
+build: off  # отключаем встроенную в appveyor систему сборки
+
+build_script:
+  - npm run build   # команда сборки
+
+# to run your custom scripts instead of automatic tests
+test_script:
+  - npm run lint && npm test
